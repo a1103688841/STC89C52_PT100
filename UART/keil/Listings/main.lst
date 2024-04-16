@@ -1,0 +1,95 @@
+C51 COMPILER V7.06   MAIN                                                                  04/15/2024 20:18:08 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil_v5\c51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+stmt level    source
+
+   1          #include <STC89C5xRC.H>
+   2          #include <uart.h>
+   3          
+   4          //宏定义声明
+   5          #define Uart_Slow 200 //串口减速时间
+   6          #define Uart_Max_Commad 10 //串口指令长度上限
+   7          
+   8          sbit relay=P1^7;
+   9          
+  10          //变量声明
+  11          unsigned int f_slow_down;//函数减速专用变量
+  12          unsigned char uart_n;//串口接收数组数据索引
+  13          unsigned char uart_rec[10];//串口接收数组
+  14          unsigned char uart_str[10];//串口发送数组
+  15          
+  16          //串口处理
+  17          void uart_service()
+  18          {
+  19   1        if(f_slow_down%Uart_Slow) return;//串口减速程序
+  20   1        if(uart_n>0)
+  21   1        {
+  22   2          relay=~relay;
+  23   2        }
+  24   1        uart_n=0;
+  25   1      }
+  26          
+  27          //T0初始化
+  28          void Timer0Init(void)   //1毫秒@24.000MHz
+  29          {
+  30   1        AUXR &= 0x7F;   //定时器时钟12T模式
+  31   1        TMOD &= 0xF0;   //设置定时器模式
+  32   1        TL0 = 0x30;   //设置定时初值
+  33   1        TH0 = 0xF8;   //设置定时初值
+  34   1        TF0 = 0;    //清除TF0标志
+  35   1        TR0 = 1;    //定时器0开始计时
+  36   1        ET0 = 1;
+  37   1        EA = 1;
+  38   1      }
+  39          
+  40          //T0中断服务
+  41          void T0_service() interrupt 1
+  42          {
+  43   1        if(++f_slow_down==500) f_slow_down=0;
+  44   1      
+  45   1      }
+  46          
+  47          //串口中断服务
+  48          void uart1_service() interrupt 4 
+  49          {
+  50   1        if(RI==1&&uart_n<Uart_Max_Commad)//若接收到数据
+  51   1        {
+  52   2          uart_rec[uart_n]=SBUF;//赋给接受数组
+  53   2          uart_n++;//索引值增1
+  54   2          RI=0;//RI清零
+C51 COMPILER V7.06   MAIN                                                                  04/15/2024 20:18:08 PAGE 2   
+
+  55   2          
+  56   2        }
+  57   1      }
+  58          
+  59          void main()
+  60          {
+  61   1        Timer0Init();
+  62   1        UartInit();
+  63   1        send_str("seventeen\r\n");
+  64   1        while(1)
+  65   1        {
+  66   2          uart_service();
+  67   2          //send_str(uart_n);
+  68   2        }
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    149    ----
+   CONSTANT SIZE    =     12    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
