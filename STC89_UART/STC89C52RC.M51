@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V5.03                                                        04/20/2024  14:53:29  PAGE 1
+BL51 BANKED LINKER/LOCATER V5.03                                                        04/20/2024  15:00:11  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V5.03, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  STC89C52RC (STC89C52RC)
             IDATA   0022H     0001H     UNIT         ?STACK
 
             * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 2
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 2
 
 
             XDATA   0000H     0042H     UNIT         _XDATA_GROUP_
@@ -72,24 +72,24 @@ LINK MAP OF MODULE:  STC89C52RC (STC89C52RC)
                     0026H     07DAH                  *** GAP ***
             CODE    0800H     076BH     UNIT         ?C?LIB_CODE
             CODE    0F6BH     0483H     UNIT         ?PR?PRINTF?PRINTF
-            CODE    13EEH     025BH     UNIT         ?PR?MAIN?STC89C52RC
-            CODE    1649H     0213H     UNIT         ?PR?_HALF_SEARCH?STC89C52RC
-            CODE    185CH     01B6H     UNIT         ?CO?STC89C52RC
-            CODE    1A12H     0039H     UNIT         ?PR?_SENDSTRING?STC89C52RC
-            CODE    1A4BH     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
-            CODE    1A72H     0024H     UNIT         ?PR?_I2C_WRITE_BYTE?STC89C52RC
-            CODE    1A96H     0023H     UNIT         ?PR?READ_ADS1110?STC89C52RC
-            CODE    1AB9H     001CH     UNIT         ?PR?ADS1110_VOLT?STC89C52RC
-            CODE    1AD5H     001AH     UNIT         ?PR?I2C_READ_BYTE?STC89C52RC
-            CODE    1AEFH     0015H     UNIT         ?PR?WAIT_ACK?STC89C52RC
-            CODE    1B04H     0014H     UNIT         ?PR?I2C_STOP?STC89C52RC
-            CODE    1B18H     0012H     UNIT         ?PR?I2C_START?STC89C52RC
-            CODE    1B2AH     0012H     UNIT         ?PR?_WRITE_ADS1110?STC89C52RC
-            CODE    1B3CH     0010H     UNIT         ?PR?UART_ISR?STC89C52RC
-            CODE    1B4CH     000FH     UNIT         ?PR?DELAY5US?STC89C52RC
-            CODE    1B5BH     000CH     UNIT         ?C_C51STARTUP
-            CODE    1B67H     000AH     UNIT         ?PR?_WRITE_ACK?STC89C52RC
-            CODE    1B71H     0009H     UNIT         ?PR?_SENDDATA?STC89C52RC
+            CODE    13EEH     025FH     UNIT         ?PR?MAIN?STC89C52RC
+            CODE    164DH     0213H     UNIT         ?PR?_HALF_SEARCH?STC89C52RC
+            CODE    1860H     01B6H     UNIT         ?CO?STC89C52RC
+            CODE    1A16H     0039H     UNIT         ?PR?_SENDSTRING?STC89C52RC
+            CODE    1A4FH     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
+            CODE    1A76H     0024H     UNIT         ?PR?_I2C_WRITE_BYTE?STC89C52RC
+            CODE    1A9AH     0023H     UNIT         ?PR?READ_ADS1110?STC89C52RC
+            CODE    1ABDH     001CH     UNIT         ?PR?ADS1110_VOLT?STC89C52RC
+            CODE    1AD9H     001AH     UNIT         ?PR?I2C_READ_BYTE?STC89C52RC
+            CODE    1AF3H     0015H     UNIT         ?PR?WAIT_ACK?STC89C52RC
+            CODE    1B08H     0014H     UNIT         ?PR?I2C_STOP?STC89C52RC
+            CODE    1B1CH     0012H     UNIT         ?PR?I2C_START?STC89C52RC
+            CODE    1B2EH     0012H     UNIT         ?PR?_WRITE_ADS1110?STC89C52RC
+            CODE    1B40H     0010H     UNIT         ?PR?UART_ISR?STC89C52RC
+            CODE    1B50H     000FH     UNIT         ?PR?DELAY5US?STC89C52RC
+            CODE    1B5FH     000CH     UNIT         ?C_C51STARTUP
+            CODE    1B6BH     000AH     UNIT         ?PR?_WRITE_ACK?STC89C52RC
+            CODE    1B75H     0009H     UNIT         ?PR?_SENDDATA?STC89C52RC
 
 
 
@@ -119,7 +119,7 @@ SEGMENT                                   BIT_GROUP          DATA_GROUP         
   +--> ?PR?I2C_STOP?STC89C52RC
 
 ?PR?I2C_START?STC89C52RC               -----    -----      -----    -----      -----    -----
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 3
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 3
 
 
   +--> ?PR?DELAY5US?STC89C52RC
@@ -156,132 +156,133 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
-  C:1AB9H         PUBLIC        Ads1110_volt
+  C:1ABDH         PUBLIC        Ads1110_volt
   B:00A8H.7       PUBLIC        EA
   B:00A8H.4       PUBLIC        ES
   B:0098H.0       PUBLIC        RI
   B:0098H.1       PUBLIC        TI
-  C:1B67H         PUBLIC        _write_ack
+  C:1B6BH         PUBLIC        _write_ack
   C:13EEH         PUBLIC        main
-  C:1B3CH         PUBLIC        Uart_Isr
-  C:1B4CH         SYMBOL        delay5us
+  C:1B40H         PUBLIC        Uart_Isr
+  C:1B50H         SYMBOL        delay5us
   D:0099H         PUBLIC        SBUF
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
-  C:1A72H         PUBLIC        _I2C_write_byte
+  C:1A76H         PUBLIC        _I2C_write_byte
   B:0021H.1       PUBLIC        busy
   D:00E0H         PUBLIC        ACC
-  C:1AEFH         PUBLIC        wait_ack
+  C:1AF3H         PUBLIC        wait_ack
   D:008DH         PUBLIC        TH1
-  C:1B18H         PUBLIC        I2C_start
+  C:1B1CH         PUBLIC        I2C_start
   D:008BH         PUBLIC        TL1
-  C:1AD5H         PUBLIC        I2C_read_byte
-  C:1649H         PUBLIC        _half_search
+  C:1AD9H         PUBLIC        I2C_read_byte
+  C:164DH         PUBLIC        _half_search
   B:0088H.6       PUBLIC        TR1
   B:0090H.5       PUBLIC        SDA
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 4
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 4
 
 
-  C:186AH         PUBLIC        Pt100_typeThermoTable
+  C:186EH         PUBLIC        Pt100_typeThermoTable
   X:0042H         PUBLIC        adc_hi
   B:0090H.6       PUBLIC        SCL
   X:0043H         PUBLIC        adc_lo
-  C:1B04H         PUBLIC        I2C_stop
-  C:1A18H         PUBLIC        _SendString
-  C:1B71H         PUBLIC        _SendData
-  C:1B2AH         PUBLIC        _write_ads1110
-  C:1A96H         PUBLIC        read_ads1110
+  C:1B08H         PUBLIC        I2C_stop
+  C:1A1CH         PUBLIC        _SendString
+  C:1B75H         PUBLIC        _SendData
+  B:0090H.7       PUBLIC        CTR
+  C:1B2EH         PUBLIC        _write_ads1110
+  C:1A9AH         PUBLIC        read_ads1110
   X:0044H         PUBLIC        buffer
   -------         PROC          UART_ISR
-  C:1B3CH         LINE#         28
-  C:1B3CH         LINE#         29
-  C:1B3FH         LINE#         30
-  C:1B41H         LINE#         31
-  C:1B44H         LINE#         32
-  C:1B44H         LINE#         33
-  C:1B47H         LINE#         34
-  C:1B49H         LINE#         35
-  C:1B4BH         LINE#         36
-  C:1B4BH         LINE#         37
+  C:1B40H         LINE#         28
+  C:1B40H         LINE#         29
+  C:1B43H         LINE#         30
+  C:1B45H         LINE#         31
+  C:1B48H         LINE#         32
+  C:1B48H         LINE#         33
+  C:1B4BH         LINE#         34
+  C:1B4DH         LINE#         35
+  C:1B4FH         LINE#         36
+  C:1B4FH         LINE#         37
   -------         ENDPROC       UART_ISR
   -------         PROC          _SENDDATA
   D:0007H         SYMBOL        dat
-  C:1B71H         LINE#         44
-  C:1B71H         LINE#         45
-  C:1B74H         LINE#         47
-  C:1B75H         LINE#         48
-  C:1B77H         LINE#         49
-  C:1B79H         LINE#         50
+  C:1B75H         LINE#         44
+  C:1B75H         LINE#         45
+  C:1B78H         LINE#         47
+  C:1B79H         LINE#         48
+  C:1B7BH         LINE#         49
+  C:1B7DH         LINE#         50
   -------         ENDPROC       _SENDDATA
   -------         PROC          L?0073
   -------         ENDPROC       L?0073
   -------         PROC          _SENDSTRING
   X:0012H         SYMBOL        s
-  C:1A18H         LINE#         57
-  C:1A23H         LINE#         58
-  C:1A33H         LINE#         59
-  C:1A33H         LINE#         60
-  C:1A48H         LINE#         61
-  C:1A4AH         LINE#         62
+  C:1A1CH         LINE#         57
+  C:1A27H         LINE#         58
+  C:1A37H         LINE#         59
+  C:1A37H         LINE#         60
+  C:1A4CH         LINE#         61
+  C:1A4EH         LINE#         62
   -------         ENDPROC       _SENDSTRING
   -------         PROC          DELAY5US
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:1B4CH         LINE#         72
-  C:1B4CH         LINE#         73
-  C:1B4CH         LINE#         75
-  C:1B5AH         LINE#         76
+  C:1B50H         LINE#         72
+  C:1B50H         LINE#         73
+  C:1B50H         LINE#         75
+  C:1B5EH         LINE#         76
   -------         ENDPROC       DELAY5US
   -------         PROC          I2C_START
-  C:1B18H         LINE#         78
-  C:1B18H         LINE#         79
-  C:1B18H         LINE#         81
-  C:1B1AH         LINE#         82
-  C:1B1DH         LINE#         83
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 5
+  C:1B1CH         LINE#         78
+  C:1B1CH         LINE#         79
+  C:1B1CH         LINE#         81
+  C:1B1EH         LINE#         82
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 5
 
 
-  C:1B1FH         LINE#         84
-  C:1B22H         LINE#         85
-  C:1B24H         LINE#         86
-  C:1B27H         LINE#         87
-  C:1B29H         LINE#         88
+  C:1B21H         LINE#         83
+  C:1B23H         LINE#         84
+  C:1B26H         LINE#         85
+  C:1B28H         LINE#         86
+  C:1B2BH         LINE#         87
+  C:1B2DH         LINE#         88
   -------         ENDPROC       I2C_START
   -------         PROC          I2C_STOP
-  C:1B04H         LINE#         90
-  C:1B04H         LINE#         91
-  C:1B04H         LINE#         92
-  C:1B06H         LINE#         93
-  C:1B09H         LINE#         94
-  C:1B0BH         LINE#         95
-  C:1B0EH         LINE#         96
-  C:1B10H         LINE#         97
-  C:1B13H         LINE#         98
-  C:1B15H         LINE#         99
+  C:1B08H         LINE#         90
+  C:1B08H         LINE#         91
+  C:1B08H         LINE#         92
+  C:1B0AH         LINE#         93
+  C:1B0DH         LINE#         94
+  C:1B0FH         LINE#         95
+  C:1B12H         LINE#         96
+  C:1B14H         LINE#         97
+  C:1B17H         LINE#         98
+  C:1B19H         LINE#         99
   -------         ENDPROC       I2C_STOP
   -------         PROC          _WRITE_ACK
   D:0007H         SYMBOL        ack
-  C:1B67H         LINE#         102
-  C:1B67H         LINE#         103
-  C:1B67H         LINE#         104
-  C:1B6CH         LINE#         105
-  C:1B6EH         LINE#         106
-  C:1B70H         LINE#         107
+  C:1B6BH         LINE#         102
+  C:1B6BH         LINE#         103
+  C:1B6BH         LINE#         104
+  C:1B70H         LINE#         105
+  C:1B72H         LINE#         106
+  C:1B74H         LINE#         107
   -------         ENDPROC       _WRITE_ACK
   -------         PROC          WAIT_ACK
   -------         DO            
   D:0007H         SYMBOL        i
   -------         ENDDO         
-  C:1AEFH         LINE#         109
-  C:1AEFH         LINE#         110
-  C:1AEFH         LINE#         111
-  C:1AF1H         LINE#         112
-  C:1AF3H         LINE#         113
-  C:1AF5H         LINE#         114
-  C:1AFEH         LINE#         115
-  C:1B01H         LINE#         116
-  C:1B03H         LINE#         117
+  C:1AF3H         LINE#         109
+  C:1AF3H         LINE#         110
+  C:1AF3H         LINE#         111
+  C:1AF5H         LINE#         112
+  C:1AF7H         LINE#         113
+  C:1AF9H         LINE#         114
+  C:1B02H         LINE#         115
+  C:1B05H         LINE#         116
+  C:1B07H         LINE#         117
   -------         ENDPROC       WAIT_ACK
   -------         PROC          _I2C_WRITE_BYTE
   D:0007H         SYMBOL        dat
@@ -289,68 +290,68 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   D:0005H         SYMBOL        i
   D:0006H         SYMBOL        mask
   -------         ENDDO         
-  C:1A72H         LINE#         120
-  C:1A72H         LINE#         122
-  C:1A74H         LINE#         123
-  C:1A76H         LINE#         124
-  C:1A78H         LINE#         125
-  C:1A7CH         LINE#         126
-  C:1A80H         LINE#         128
-  C:1A82H         LINE#         130
-  C:1A86H         LINE#         131
-  C:1A88H         LINE#         132
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 6
+  C:1A76H         LINE#         120
+  C:1A76H         LINE#         122
+  C:1A78H         LINE#         123
+  C:1A7AH         LINE#         124
+  C:1A7CH         LINE#         125
+  C:1A80H         LINE#         126
+  C:1A84H         LINE#         128
+  C:1A86H         LINE#         130
+  C:1A8AH         LINE#         131
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 6
 
 
-  C:1A8AH         LINE#         133
-  C:1A8FH         LINE#         134
-  C:1A91H         LINE#         135
-  C:1A93H         LINE#         136
+  C:1A8CH         LINE#         132
+  C:1A8EH         LINE#         133
+  C:1A93H         LINE#         134
+  C:1A95H         LINE#         135
+  C:1A97H         LINE#         136
   -------         ENDPROC       _I2C_WRITE_BYTE
   -------         PROC          I2C_READ_BYTE
   -------         DO            
   D:0006H         SYMBOL        i
   D:0007H         SYMBOL        k
   -------         ENDDO         
-  C:1AD5H         LINE#         140
-  C:1AD5H         LINE#         142
-  C:1AD7H         LINE#         143
-  C:1AD9H         LINE#         144
-  C:1ADBH         LINE#         145
-  C:1ADDH         LINE#         146
-  C:1AE7H         LINE#         147
-  C:1AE9H         LINE#         148
-  C:1AEEH         LINE#         150
-  C:1AEEH         LINE#         151
+  C:1AD9H         LINE#         140
+  C:1AD9H         LINE#         142
+  C:1ADBH         LINE#         143
+  C:1ADDH         LINE#         144
+  C:1ADFH         LINE#         145
+  C:1AE1H         LINE#         146
+  C:1AEBH         LINE#         147
+  C:1AEDH         LINE#         148
+  C:1AF2H         LINE#         150
+  C:1AF2H         LINE#         151
   -------         ENDPROC       I2C_READ_BYTE
   -------         PROC          _WRITE_ADS1110
   D:0004H         SYMBOL        cmd
-  C:1B2AH         LINE#         154
-  C:1B2CH         LINE#         155
-  C:1B2FH         LINE#         156
-  C:1B34H         LINE#         157
-  C:1B39H         LINE#         158
+  C:1B2EH         LINE#         154
+  C:1B30H         LINE#         155
+  C:1B33H         LINE#         156
+  C:1B38H         LINE#         157
+  C:1B3DH         LINE#         158
   -------         ENDPROC       _WRITE_ADS1110
   -------         PROC          READ_ADS1110
-  C:1A96H         LINE#         161
-  C:1A96H         LINE#         162
-  C:1A99H         LINE#         163
-  C:1A9EH         LINE#         164
-  C:1AA6H         LINE#         165
-  C:1AABH         LINE#         166
-  C:1AB1H         LINE#         167
-  C:1AB6H         LINE#         168
+  C:1A9AH         LINE#         161
+  C:1A9AH         LINE#         162
+  C:1A9DH         LINE#         163
+  C:1AA2H         LINE#         164
+  C:1AAAH         LINE#         165
+  C:1AAFH         LINE#         166
+  C:1AB5H         LINE#         167
+  C:1ABAH         LINE#         168
   -------         ENDPROC       READ_ADS1110
   -------         PROC          ADS1110_VOLT
   -------         DO            
   D:0006H         SYMBOL        temp
   -------         ENDDO         
-  C:1AB9H         LINE#         172
-  C:1AB9H         LINE#         174
-  C:1ABEH         LINE#         176
-  C:1AC1H         LINE#         177
-  C:1AD4H         LINE#         178
-  C:1AD4H         LINE#         179
+  C:1ABDH         LINE#         172
+  C:1ABDH         LINE#         174
+  C:1AC2H         LINE#         176
+  C:1AC5H         LINE#         177
+  C:1AD8H         LINE#         178
+  C:1AD8H         LINE#         179
   -------         ENDPROC       ADS1110_VOLT
   -------         PROC          _HALF_SEARCH
   X:0012H         SYMBOL        A
@@ -358,36 +359,36 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   X:0017H         SYMBOL        key
   -------         DO            
   X:001BH         SYMBOL        low
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 7
+
+
   X:001DH         SYMBOL        high
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 7
-
-
   X:001FH         SYMBOL        mid
   X:0021H         SYMBOL        keytemp
   -------         ENDDO         
-  C:1649H         LINE#         198
-  C:165CH         LINE#         201
-  C:166EH         LINE#         202
-  C:1675H         LINE#         203
-  C:1681H         LINE#         205
-  C:16B9H         LINE#         207
-  C:16BFH         LINE#         208
-  C:16E0H         LINE#         210
-  C:16E4H         LINE#         211
-  C:16E4H         LINE#         213
-  C:171BH         LINE#         214
-  C:173CH         LINE#         215
-  C:17B2H         LINE#         217
-  C:17BBH         LINE#         218
-  C:17BBH         LINE#         219
-  C:17F3H         LINE#         220
-  C:1807H         LINE#         221
-  C:1807H         LINE#         222
-  C:1840H         LINE#         223
-  C:1854H         LINE#         224
-  C:1854H         LINE#         225
-  C:1857H         LINE#         227
-  C:185BH         LINE#         228
+  C:164DH         LINE#         198
+  C:1660H         LINE#         201
+  C:1672H         LINE#         202
+  C:1679H         LINE#         203
+  C:1685H         LINE#         205
+  C:16BDH         LINE#         207
+  C:16C3H         LINE#         208
+  C:16E4H         LINE#         210
+  C:16E8H         LINE#         211
+  C:16E8H         LINE#         213
+  C:171FH         LINE#         214
+  C:1740H         LINE#         215
+  C:17B6H         LINE#         217
+  C:17BFH         LINE#         218
+  C:17BFH         LINE#         219
+  C:17F7H         LINE#         220
+  C:180BH         LINE#         221
+  C:180BH         LINE#         222
+  C:1844H         LINE#         223
+  C:1858H         LINE#         224
+  C:1858H         LINE#         225
+  C:185BH         LINE#         227
+  C:185FH         LINE#         228
   -------         ENDPROC       _HALF_SEARCH
   -------         PROC          MAIN
   -------         DO            
@@ -402,52 +403,54 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   X:0010H         SYMBOL        j
   -------         ENDDO         
   -------         ENDDO         
-  C:13EEH         LINE#         232
-  C:13EEH         LINE#         237
-  C:13F1H         LINE#         238
-  C:13F4H         LINE#         239
-  C:13FAH         LINE#         240
-  C:13FCH         LINE#         241
-  C:13FEH         LINE#         242
-  C:1400H         LINE#         244
-  C:1400H         LINE#         246
-  C:1407H         LINE#         247
-  C:1428H         LINE#         248
-  C:1442H         LINE#         249
-  C:1445H         LINE#         250
-  C:1469H         LINE#         251
-  C:1492H         LINE#         253
-  C:1498H         LINE#         254
-  C:149FH         LINE#         255
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 8
+  C:13EEH         LINE#         233
+  C:13EEH         LINE#         238
+  C:13F1H         LINE#         239
+  C:13F4H         LINE#         240
+  C:13FAH         LINE#         241
+  C:13FCH         LINE#         242
+  C:13FEH         LINE#         243
+  C:1400H         LINE#         245
+  C:1400H         LINE#         247
+  C:1407H         LINE#         248
+  C:1428H         LINE#         249
+  C:1442H         LINE#         250
+  C:1445H         LINE#         251
+  C:1469H         LINE#         252
+  C:1492H         LINE#         254
+  C:1498H         LINE#         255
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 8
 
 
-  C:14A3H         LINE#         256
-  C:14A7H         LINE#         257
-  C:14AFH         LINE#         258
+  C:149FH         LINE#         256
+  C:14A3H         LINE#         257
+  C:14A7H         LINE#         258
   C:14AFH         LINE#         259
-  C:14B1H         LINE#         261
-  C:14BDH         LINE#         262
-  C:14D4H         LINE#         263
-  C:14DAH         LINE#         264
-  C:14DEH         LINE#         265
+  C:14AFH         LINE#         260
+  C:14B1H         LINE#         262
+  C:14BDH         LINE#         263
+  C:14D4H         LINE#         264
+  C:14DAH         LINE#         265
   C:14DEH         LINE#         266
-  C:14E1H         LINE#         268
+  C:14DEH         LINE#         267
   C:14E1H         LINE#         269
-  C:1508H         LINE#         270
-  C:152FH         LINE#         271
-  C:15C1H         LINE#         272
-  C:15DFH         LINE#         273
-  C:15DFH         LINE#         276
-  C:15FBH         LINE#         277
+  C:14E1H         LINE#         270
+  C:1508H         LINE#         271
+  C:152FH         LINE#         272
+  C:15C1H         LINE#         273
+  C:15DFH         LINE#         274
+  C:15DFH         LINE#         277
   C:15FBH         LINE#         278
-  C:1612H         LINE#         279
-  C:1615H         LINE#         280
-  C:1618H         LINE#         282
-  C:1618H         LINE#         283
-  C:1643H         LINE#         284
-  C:1646H         LINE#         285
-  C:1646H         LINE#         286
+  C:15FBH         LINE#         279
+  C:1612H         LINE#         280
+  C:1615H         LINE#         281
+  C:1617H         LINE#         282
+  C:161AH         LINE#         284
+  C:161AH         LINE#         285
+  C:1645H         LINE#         286
+  C:1648H         LINE#         287
+  C:164AH         LINE#         288
+  C:164AH         LINE#         289
   -------         ENDPROC       MAIN
   -------         ENDMOD        STC89C52RC
 
@@ -476,11 +479,11 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   -------         ENDMOD        ?C?FCAST
 
   -------         MODULE        ?C?CASTF
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 9
+
+
   C:0B49H         PUBLIC        ?C?CASTF
   -------         ENDMOD        ?C?CASTF
-
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 9
-
 
   -------         MODULE        PRINTF
   X:0012H         PUBLIC        ?_PRINTF?BYTE
@@ -536,12 +539,12 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   -------         MODULE        ?C?LLDOPTR
   C:0E60H         PUBLIC        ?C?LLDOPTR
   -------         ENDMOD        ?C?LLDOPTR
+BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  15:00:11  PAGE 10
+
+
 
   -------         MODULE        ?C?LLDCODE
   C:0E90H         PUBLIC        ?C?LLDCODE
-BL51 BANKED LINKER/LOCATER V5.03                                                      04/20/2024  14:53:29  PAGE 10
-
-
   -------         ENDMOD        ?C?LLDCODE
 
   -------         MODULE        ?C?LSTXDATA
@@ -561,7 +564,7 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   -------         ENDMOD        ?C?CCASE
 
   -------         MODULE        PUTCHAR
-  C:1A4BH         PUBLIC        _PUTCHAR
+  C:1A4FH         PUBLIC        _PUTCHAR
   -------         ENDMOD        PUTCHAR
 
   -------         MODULE        ?C?UIDIV
@@ -581,8 +584,8 @@ SYMBOL TABLE OF MODULE:  STC89C52RC (STC89C52RC)
   -------         ENDMOD        ?C?LLDPDATA
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0776H BYTE (93%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 077AH BYTE (93%) *
 ******************************************************************************
 
-Program Size: data=15.2 xdata=118 code=4992
+Program Size: data=15.2 xdata=118 code=4996
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,4 +1,4 @@
-C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 1   
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 15:00:10 PAGE 1   
 
 
 C51 COMPILER V7.06, COMPILATION OF MODULE STC89C52RC
@@ -62,7 +62,7 @@ stmt level    source
   53          Send a string to UART
   54          Input: s (address of string)
   55          Output:None
-C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 2   
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 15:00:10 PAGE 2   
 
   56          ----------------------------*/
   57          void SendString(char *s) {
@@ -126,7 +126,7 @@ stmt level    source
  115   1          i++;
  116   1        SCL = 0;
  117   1      }
-C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 3   
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 15:00:10 PAGE 3   
 
  118          
  119          /*I2C写入一个字节*/
@@ -190,7 +190,7 @@ stmt level    source
  177   1        temp = adc_hi * 255 + adc_lo;
  178   1        return temp;
  179   1      }
-C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 4   
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 15:00:10 PAGE 4   
 
  180          
  181          const float  code Pt100_typeThermoTable[106]
@@ -244,68 +244,71 @@ stmt level    source
  229          
  230          //
  231          char buffer[50];
- 232          void main() {
- 233   1        unsigned int adc;
- 234   1        int indexFind, A1, A2;
- 235   1        float temperature;
- 236   1        float oumu_estimation;
- 237   1        SCON = 0x50;                          // 8-bit variable UART
- 238   1        TMOD = 0x20;                          // Set Timer1 as 8-bit auto reload mode
- 239   1        TH1 = TL1 = -(FOSC / 12 / 32 / BAUD); // Set auto-reload vaule
- 240   1        TR1 = 1;                              // Timer1 start run
- 241   1        ES = 1;                               // Enable UART interrupt
-C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 5   
+ 232          sbit CTR = P1 ^ 7;
+ 233          void main() {
+ 234   1        unsigned int adc;
+ 235   1        int indexFind, A1, A2;
+ 236   1        float temperature;
+ 237   1        float oumu_estimation;
+ 238   1        SCON = 0x50;                          // 8-bit variable UART
+ 239   1        TMOD = 0x20;                          // Set Timer1 as 8-bit auto reload mode
+ 240   1        TH1 = TL1 = -(FOSC / 12 / 32 / BAUD); // Set auto-reload vaule
+ 241   1        TR1 = 1;                              // Timer1 start run
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 15:00:10 PAGE 5   
 
- 242   1        EA = 1;                               // Open master interrupt switch
- 243   1      
- 244   1        while (1) {
- 245   2          int i, j;
- 246   2          for (i = 0; i < 100; i++) {
- 247   3            for (j = 0; j < 100; j++);
- 248   3          }
- 249   2          adc = Ads1110_volt();
- 250   2        oumu_estimation = adc*0.0031+96.362;
- 251   2         indexFind = half_search(Pt100_typeThermoTable, 106, oumu_estimation);
- 252   2         // 没找到
- 253   2         if (indexFind == -1) {
- 254   3           indexFind = 0;
- 255   3           A1 = 0;
- 256   3           A2 = 0;
- 257   3           temperature = A1;
- 258   3           temperature += -200;
- 259   3         }
- 260   2         // 索引到最大值情况
- 261   2         else if (indexFind == 106 - 1) {
- 262   3           A1 = indexFind * 10;
- 263   3           A2 = indexFind * 10;
- 264   3           temperature = A1;
- 265   3           temperature += -200;
- 266   3         }
- 267   2         // 正常情况
- 268   2         else {
- 269   3           A1 = Pt100_typeThermoTable[indexFind];
- 270   3           A2 = Pt100_typeThermoTable[indexFind + 1];
- 271   3           temperature = (double)((oumu_estimation - A1) / (A2 - A1) * 10 + indexFind * 10);
- 272   3           temperature += -200;
- 273   3         }
- 274   2         //    sprintf(buffer, "%d,%f,%f", adc,oumu_estimation , temperature);
- 275   2         // SendString(buffer);
- 276   2         if(temperature > 40.0)
- 277   2         {
- 278   3          sprintf(buffer, "waring!!");
- 279   3            SendString(buffer);
- 280   3         }
- 281   2         else
- 282   2         {
- 283   3          sprintf(buffer, "%f℃", temperature);
- 284   3           SendString(buffer);
- 285   3         }
- 286   2        }
- 287   1      }
+ 242   1        ES = 1;                               // Enable UART interrupt
+ 243   1        EA = 1;                               // Open master interrupt switch
+ 244   1      
+ 245   1        while (1) {
+ 246   2          int i, j;
+ 247   2          for (i = 0; i < 100; i++) {
+ 248   3            for (j = 0; j < 100; j++);
+ 249   3          }
+ 250   2          adc = Ads1110_volt();
+ 251   2        oumu_estimation = adc*0.0031+96.362;
+ 252   2         indexFind = half_search(Pt100_typeThermoTable, 106, oumu_estimation);
+ 253   2         // 没找到
+ 254   2         if (indexFind == -1) {
+ 255   3           indexFind = 0;
+ 256   3           A1 = 0;
+ 257   3           A2 = 0;
+ 258   3           temperature = A1;
+ 259   3           temperature += -200;
+ 260   3         }
+ 261   2         // 索引到最大值情况
+ 262   2         else if (indexFind == 106 - 1) {
+ 263   3           A1 = indexFind * 10;
+ 264   3           A2 = indexFind * 10;
+ 265   3           temperature = A1;
+ 266   3           temperature += -200;
+ 267   3         }
+ 268   2         // 正常情况
+ 269   2         else {
+ 270   3           A1 = Pt100_typeThermoTable[indexFind];
+ 271   3           A2 = Pt100_typeThermoTable[indexFind + 1];
+ 272   3           temperature = (double)((oumu_estimation - A1) / (A2 - A1) * 10 + indexFind * 10);
+ 273   3           temperature += -200;
+ 274   3         }
+ 275   2         //    sprintf(buffer, "%d,%f,%f", adc,oumu_estimation , temperature);
+ 276   2         // SendString(buffer);
+ 277   2         if(temperature > 40.0)
+ 278   2         {
+ 279   3          sprintf(buffer, "waring!!");
+ 280   3            SendString(buffer);
+ 281   3           CTR = 1;
+ 282   3         }
+ 283   2         else
+ 284   2         {
+ 285   3          sprintf(buffer, "%f℃", temperature);
+ 286   3           SendString(buffer);
+ 287   3           CTR = 0;
+ 288   3         }
+ 289   2        }
+ 290   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1443    ----
+   CODE SIZE        =   1447    ----
    CONSTANT SIZE    =    438    ----
    XDATA SIZE       =     52      40
    PDATA SIZE       =   ----    ----

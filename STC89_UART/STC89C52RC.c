@@ -229,6 +229,7 @@ int half_search(const float A[], int n, double key) {
 
 //
 char buffer[50];
+sbit CTR = P1 ^ 7;
 void main() {
   unsigned int adc;
   int indexFind, A1, A2;
@@ -277,11 +278,13 @@ void main() {
    {
 	  sprintf(buffer, "waring!!");
       SendString(buffer);
+		 CTR = 1;
    }
    else
    {
    	sprintf(buffer, "%f¡æ", temperature);
    	 SendString(buffer);
+		 CTR = 0;
    }
   }
 }
