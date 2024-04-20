@@ -7,20 +7,20 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>STC89C52RC</TargetName>
       <ToolsetNumber>0x0</ToolsetNumber>
       <ToolsetName>MCS-51</ToolsetName>
       <uAC6>8</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STC89C52RC</Device>
+          <Device>STC15F2K60S2</Device>
           <Vendor>STC</Vendor>
-          <Cpu>IRAM(0-0xFF) XRAM(0-0xFF) IROM(0-0x1FFF) CLOCK(45000000) MODP2</Cpu>
+          <Cpu>IRAM(0-0xFF) XRAM(0-0x6FF) IROM(0-0xEFF8) CLOCK(35000000) MODP2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>"LIB\STARTUP.A51" ("Standard 8051 Startup Code")</StartupFile>
           <FlashDriverDll></FlashDriverDll>
-          <DeviceId>61442</DeviceId>
-          <RegisterFile>STC89C5xRC.H</RegisterFile>
+          <DeviceId>62472</DeviceId>
+          <RegisterFile>STC15F2K60S2.H</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,10 +33,10 @@
           <SFDFile></SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
-          <BinPath>C:\Keil5\Keil_v5\c51\BIN\</BinPath>
+          <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath></RegisterFilePath>
+          <RegisterFilePath>STC\</RegisterFilePath>
           <DBRegisterFilePath>STC\</DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
@@ -45,14 +45,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>test4</OutputName>
+          <OutputDirectory>.\</OutputDirectory>
+          <OutputName>STC89C52RC</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\</ListingPath>
           <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -110,7 +110,7 @@
           <SimDllName>S8051.DLL</SimDllName>
           <SimDllArguments></SimDllArguments>
           <SimDlgDll>DP51.DLL</SimDlgDll>
-          <SimDlgDllArguments>-p51</SimDlgDllArguments>
+          <SimDlgDllArguments>-pDP8051</SimDlgDllArguments>
           <TargetDllName>S8051.DLL</TargetDllName>
           <TargetDllArguments></TargetDllArguments>
           <TargetDlgDll>TP51.DLL</TargetDlgDll>
@@ -145,7 +145,7 @@
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints>
+            <RestoreTracepoints>0</RestoreTracepoints>
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
@@ -186,7 +186,7 @@
         </Utilities>
         <Target51>
           <Target51Misc>
-            <MemoryModel>0</MemoryModel>
+            <MemoryModel>2</MemoryModel>
             <RTOS>0</RTOS>
             <RomSize>2</RomSize>
             <DataHold>0</DataHold>
@@ -273,7 +273,7 @@
               <IRO>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x2000</Size>
+                <Size>0xeff9</Size>
               </IRO>
               <IRA>
                 <Type>0</Type>
@@ -283,7 +283,7 @@
               <XRA>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x100</Size>
+                <Size>0x700</Size>
               </XRA>
               <XRA512>
                 <Type>0</Type>
@@ -374,17 +374,12 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>Source</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>STC89C52RC.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\uart.c</FilePath>
+              <FilePath>.\STC89C52RC.c</FilePath>
             </File>
           </Files>
         </Group>

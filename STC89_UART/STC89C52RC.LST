@@ -1,0 +1,318 @@
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE STC89C52RC
+OBJECT MODULE PLACED IN STC89C52RC.OBJ
+COMPILER INVOKED BY: D:\Keil_v5\c51\BIN\C51.EXE STC89C52RC.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+stmt level    source
+
+   1          /*------------------------------------------------------------------*/
+   2          /* --- STC MCU Limited ---------------------------------------------*/
+   3          /* --- STC89-90xx Series MCU UART (8-bit/9-bit)Demo ----------------*/
+   4          /* --- Mobile: (86)13922805190 -------------------------------------*/
+   5          /* --- Fax: 86-0513-55012956,55012947,55012969 ---------------------*/
+   6          /* --- Tel: 86-0513-55012928,55012929,55012966----------------------*/
+   7          /* --- Web: www.STCMCU.com -----------------------------------------*/
+   8          /* --- Web: www.GXWMCU.com -----------------------------------------*/
+   9          /* If you want to use the program or the program referenced in the  */
+  10          /* article, please specify in which data and procedures from STC    */
+  11          /*------------------------------------------------------------------*/
+  12          
+  13          #include "intrins.h"
+  14          #include "reg51.h"
+  15          #include <stdio.h>
+  16          
+  17          typedef unsigned char BYTE;
+  18          typedef unsigned int WORD;
+  19          
+  20          #define FOSC 12000000L // System frequency
+  21          #define BAUD 2400      // UART baudrate
+  22          
+  23          bit busy;
+  24          
+  25          /*----------------------------
+  26          UART interrupt service routine
+  27          ----------------------------*/
+  28          void Uart_Isr() interrupt 4 {
+  29   1        if (RI) {
+  30   2          RI = 0;    // Clear receive interrupt flag
+  31   2          P0 = SBUF; // P0 show UART data
+  32   2        }
+  33   1        if (TI) {
+  34   2          TI = 0;   // Clear transmit interrupt flag
+  35   2          busy = 0; // Clear transmit busy flag
+  36   2        }
+  37   1      }
+  38          
+  39          /*----------------------------
+  40          Send a byte data to UART
+  41          Input: dat (data to be sent)
+  42          Output:None
+  43          ----------------------------*/
+  44          void SendData(BYTE dat) {
+  45   1        while (busy)
+  46   1          ;        // Wait for the completion of the previous data is sent
+  47   1        ACC = dat; // Calculate the even parity bit P (PSW.0)
+  48   1        busy = 1;
+  49   1        SBUF = ACC; // Send data to UART buffer
+  50   1      }
+  51          
+  52          /*----------------------------
+  53          Send a string to UART
+  54          Input: s (address of string)
+  55          Output:None
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 2   
+
+  56          ----------------------------*/
+  57          void SendString(char *s) {
+  58   1        while (*s) // Check the end of the string
+  59   1        {
+  60   2          SendData(*s++); // Send current char and increment string ptr
+  61   2        }
+  62   1      }
+  63          // ADS1110
+  64          sbit SCL = P1 ^ 6; // ADS1110
+  65          sbit SDA = P1 ^ 5; // ADS1110
+  66          unsigned char adc_hi;
+  67          unsigned char adc_lo;
+  68          /***************************************************************************/
+  69          /*    函数原型: void ads1100_start (void) */
+  70          /*    功    能: 提供I2C总线工作时序中的起始位。                            */
+  71          /***************************************************************************/
+  72          static void delay5us(void) // 误差 0us
+  73          {
+  74   1        int i;
+  75   1        for (i = 0; i < 2; i++);
+  76   1      }
+  77          
+  78          void I2C_start() // SCL 为高电平期间，SDA从高到低变换为起始信号
+  79          {
+  80   1      
+  81   1        SDA = 1;
+  82   1        delay5us();
+  83   1        SCL = 1; // 11111
+  84   1        delay5us();
+  85   1        SDA = 0;
+  86   1        delay5us();
+  87   1        SCL = 0;
+  88   1      }
+  89          
+  90          void I2C_stop() // SCL为高电平期间，SDA从低电平到高电平的变化为结束信号
+  91          {
+  92   1        SDA = 0;
+  93   1        delay5us();
+  94   1        SCL = 0;
+  95   1        delay5us();
+  96   1        SCL = 1;
+  97   1        delay5us();
+  98   1        SDA = 1;
+  99   1        delay5us();
+ 100   1      }
+ 101          
+ 102          void write_ack(unsigned char ack) // 写ACK
+ 103          {
+ 104   1        SDA = ack;
+ 105   1        SCL = 1;
+ 106   1        SCL = 0;
+ 107   1      }
+ 108          
+ 109          void wait_ack() // 等待ACK
+ 110          {
+ 111   1        unsigned char i = 0;
+ 112   1        SDA = 1;
+ 113   1        SCL = 1;
+ 114   1        while ((SDA == 1) && (i < 250))
+ 115   1          i++;
+ 116   1        SCL = 0;
+ 117   1      }
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 3   
+
+ 118          
+ 119          /*I2C写入一个字节*/
+ 120          void I2C_write_byte(unsigned char dat) {
+ 121   1        unsigned char i, mask;
+ 122   1        mask = 0x80;
+ 123   1        for (i = 0; i < 8; i++) {
+ 124   2          SCL = 0;
+ 125   2          if ((mask & dat) == 0)
+ 126   2            SDA = 0;
+ 127   2          else
+ 128   2            SDA = 1;
+ 129   2      
+ 130   2          mask >>= 1;
+ 131   2          SCL = 1;
+ 132   2          SCL = 0; //*****
+ 133   2        }
+ 134   1        SCL = 0;
+ 135   1        SDA = 1;
+ 136   1        wait_ack();
+ 137   1      }
+ 138          
+ 139          /*从I2C内读取一个字节*/
+ 140          unsigned char I2C_read_byte() {
+ 141   1        unsigned char i, k;
+ 142   1        SCL = 0;
+ 143   1        SDA = 1;
+ 144   1        for (i = 0; i < 8; i++) {
+ 145   2          SCL = 1;
+ 146   2          k = (k << 1) | SDA;
+ 147   2          SCL = 0;
+ 148   2        }
+ 149   1      
+ 150   1        return k;
+ 151   1      }
+ 152          
+ 153          /*往ADS1110里写*/
+ 154          void write_ads1110(unsigned char cmd) {
+ 155   1        I2C_start();
+ 156   1        I2C_write_byte(0X90); // ADS1110地址 写
+ 157   1        I2C_write_byte(cmd);
+ 158   1        I2C_stop();
+ 159   1      }
+ 160          /*从ADS1110里读*/
+ 161          void read_ads1110() {
+ 162   1        I2C_start();
+ 163   1        I2C_write_byte(0x91); // ADS1110地址 读
+ 164   1        adc_hi = I2C_read_byte();
+ 165   1        write_ack(0);
+ 166   1        adc_lo = I2C_read_byte();
+ 167   1        write_ack(1);
+ 168   1        I2C_stop();
+ 169   1      }
+ 170          
+ 171          /*ADS1110读取电压*/
+ 172          unsigned int Ads1110_volt(void) {
+ 173   1        unsigned int temp;
+ 174   1        write_ads1110(
+ 175   1            0x8c); // 设置ADS1110 连续转换模式，数据传输速率15SPS 增益为1 16位转换
+ 176   1        read_ads1110();
+ 177   1        temp = adc_hi * 255 + adc_lo;
+ 178   1        return temp;
+ 179   1      }
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 4   
+
+ 180          
+ 181          const float  code Pt100_typeThermoTable[106]
+ 182          =
+ 183          {
+ 184              18.52,  22.83,  27.10,  31.34,  35.54,  39.72,  43.88,  48.00,  52.11,  56.19,
+ 185              60.26,  64.30,  68.33,  72.33,  76.33,  80.31,  84.27,  88.22,  92.16,  96.09,
+ 186              100.00, 103.90, 107.79, 111.67, 115.54, 119.40, 123.24, 127.08, 130.90, 134.71,
+ 187              138.51, 142.29, 146.07, 149.83, 153.58, 157.33, 161.05, 164.77, 168.48, 172.17,
+ 188              175.86, 179.53, 183.19, 186.84, 190.47, 194.10, 197.71, 201.31, 204.90, 208.48,
+ 189              212.05, 215.61, 219.15, 222.68, 226.21, 229.72, 233.21, 236.70, 240.18, 243.64,
+ 190              247.09, 250.53, 253.96, 257.38, 260.78, 264.18, 267.56, 270.93, 274.29, 277.64,
+ 191              280.98, 284.30, 287.62, 290.92, 294.21, 297.49, 300.75, 304.01, 307.25, 310.49,
+ 192              313.71, 316.92, 320.12, 323.30, 326.48, 329.64, 332.79, 335.93, 339.06, 342.18,
+ 193              345.28, 348.38, 351.46, 354.53, 357.59, 360.64, 363.67, 366.70, 369.71, 372.71,
+ 194              375.70, 378.68, 381.65, 384.60, 387.55, 390.48
+ 195          
+ 196          };
+ 197          
+ 198          int half_search(const float A[], int n, double key) {
+ 199   1       int low, high, mid;
+ 200   1       double keytemp;
+ 201   1       keytemp = key;
+ 202   1       low = 0;
+ 203   1       high = n - 1;
+ 204   1      
+ 205   1       if (keytemp > A[high]) {
+ 206   2         // Uart_Printf("%s(%d):折半返回%d",__MODULE__,__LINE__,high-1);
+ 207   2         return high;
+ 208   2       } else if (keytemp < A[0]) {
+ 209   2         // Uart_Printf("%s(%d):折半返回%d",__MODULE__,__LINE__,0);
+ 210   2         return 0;
+ 211   2       }
+ 212   1      
+ 213   1       while (low <= n - 1 && high >= 0) {
+ 214   2         mid = (low + high + 1) / 2;
+ 215   2         if (A[mid] <= keytemp && keytemp <= A[mid + 1]) {
+ 216   3           // Uart_Printf("%s(%d):折半返回%d",__MODULE__,__LINE__,mid);
+ 217   3           return mid;
+ 218   3         }
+ 219   2         if (A[mid] < keytemp) {
+ 220   3           low = mid + 1;
+ 221   3         }
+ 222   2         if (A[mid] > keytemp) {
+ 223   3           high = mid - 1;
+ 224   3         }
+ 225   2       }
+ 226   1       // Uart_Printf("%s(%d):折半返回%d",__MODULE__,__LINE__,-1);
+ 227   1       return -1;
+ 228   1      }
+ 229          
+ 230          //
+ 231          char buffer[50];
+ 232          void main() {
+ 233   1        unsigned int adc;
+ 234   1        int indexFind, A1, A2;
+ 235   1        float temperature;
+ 236   1        float oumu_estimation;
+ 237   1        SCON = 0x50;                          // 8-bit variable UART
+ 238   1        TMOD = 0x20;                          // Set Timer1 as 8-bit auto reload mode
+ 239   1        TH1 = TL1 = -(FOSC / 12 / 32 / BAUD); // Set auto-reload vaule
+ 240   1        TR1 = 1;                              // Timer1 start run
+ 241   1        ES = 1;                               // Enable UART interrupt
+C51 COMPILER V7.06   STC89C52RC                                                            04/20/2024 14:53:29 PAGE 5   
+
+ 242   1        EA = 1;                               // Open master interrupt switch
+ 243   1      
+ 244   1        while (1) {
+ 245   2          int i, j;
+ 246   2          for (i = 0; i < 100; i++) {
+ 247   3            for (j = 0; j < 100; j++);
+ 248   3          }
+ 249   2          adc = Ads1110_volt();
+ 250   2        oumu_estimation = adc*0.0031+96.362;
+ 251   2         indexFind = half_search(Pt100_typeThermoTable, 106, oumu_estimation);
+ 252   2         // 没找到
+ 253   2         if (indexFind == -1) {
+ 254   3           indexFind = 0;
+ 255   3           A1 = 0;
+ 256   3           A2 = 0;
+ 257   3           temperature = A1;
+ 258   3           temperature += -200;
+ 259   3         }
+ 260   2         // 索引到最大值情况
+ 261   2         else if (indexFind == 106 - 1) {
+ 262   3           A1 = indexFind * 10;
+ 263   3           A2 = indexFind * 10;
+ 264   3           temperature = A1;
+ 265   3           temperature += -200;
+ 266   3         }
+ 267   2         // 正常情况
+ 268   2         else {
+ 269   3           A1 = Pt100_typeThermoTable[indexFind];
+ 270   3           A2 = Pt100_typeThermoTable[indexFind + 1];
+ 271   3           temperature = (double)((oumu_estimation - A1) / (A2 - A1) * 10 + indexFind * 10);
+ 272   3           temperature += -200;
+ 273   3         }
+ 274   2         //    sprintf(buffer, "%d,%f,%f", adc,oumu_estimation , temperature);
+ 275   2         // SendString(buffer);
+ 276   2         if(temperature > 40.0)
+ 277   2         {
+ 278   3          sprintf(buffer, "waring!!");
+ 279   3            SendString(buffer);
+ 280   3         }
+ 281   2         else
+ 282   2         {
+ 283   3          sprintf(buffer, "%f℃", temperature);
+ 284   3           SendString(buffer);
+ 285   3         }
+ 286   2        }
+ 287   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1443    ----
+   CONSTANT SIZE    =    438    ----
+   XDATA SIZE       =     52      40
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
